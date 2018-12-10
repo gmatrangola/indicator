@@ -49,4 +49,16 @@ docker exec -ti spring-cassandra cqlsh localhost
 
 8. Verify output in CQL
 
+# Lab 4
+
+1. Implement the code from the Demo in your application.
+2. Add an optional age query string parameter to add (/new) that takes a String and uses SimpleDateFormat to convert it to a java.util.Date.
+3. Set the Date in the Customer object
+4. For now, catch and swallow the exception from SimpleDateFormat.parse(). We’ll cover exception handling soon
+5. Create a request mapping to get a customer by ID (DB PK) using a @PathVariable
+6. Add another /add that takes a Customer as a @RequestBody parameter and has a RequestType.PUT
+7. Add @RequestMapping to the all customers when request is “/customers/”
+8. Add a top level / that gets all the customers
+9. Add email and zipcode to the Customer domain class bean
+
  
