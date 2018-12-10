@@ -10,6 +10,11 @@ Accept: application/json
 
 ###
 
+GET http://localhost:8080/makeCustomer?email=geoff@matrangola.com&lastName=Matrangola&firstName=Geoff
+Accept: application/json
+
+###
+
 GET http://localhost:8080/makeCustomer
 Accept: application/json
 
