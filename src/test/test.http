@@ -10,12 +10,25 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/makeCustomer?email=geoff@matrangola.com&lastName=Matrangola&firstName=Geoff
+GET http://localhost:8080/customers/new?email=geoff@matrangola.com&lastName=Matrangola&firstName=Geoff
 Accept: application/json
 
 ###
 
 GET http://localhost:8080/makeCustomer
 Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8080/customers/new
+content-type: application/json
+
+{
+  "firstName": "Tom",
+  "lastName": "Smith",
+  "birthday": "1991-04-02",
+  "email" : "ts@example.com"
+
+}
 
 ###

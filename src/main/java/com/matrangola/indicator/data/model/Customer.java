@@ -5,6 +5,7 @@ import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Table("customer")
@@ -16,6 +17,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
+    private Date birthday;
 
     public UUID getId() {
         return id;
@@ -47,5 +49,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 }
