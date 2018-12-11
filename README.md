@@ -61,4 +61,17 @@ docker exec -ti spring-cassandra cqlsh localhost
 8. Add a top level / that gets all the customers
 9. Add email and zipcode to the Customer domain class bean
 
+## Import
+
+```bash
+# Start Web Service NOW!
+
+> docker cp data/scitech.csv spring-cassandra:/tmp/
+> docker exec -ti spring-cassandra cqlsh localhost
+cqlsh> COPY world.indicator (countryname,countrycode,indicatorname,indicatorcode,year1970,year1980,year1990,year2000,year2010,year2017,year2018) FROM 'tmp/scitech.csv' WITH HEADER = TRUE
+cqlsh> select * from world.indicator where countrycode = 'BGR';
+```
+
+## 
+
  
