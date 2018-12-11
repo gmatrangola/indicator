@@ -2,6 +2,7 @@ package com.matrangola.indicator.data.model;
 
 import com.datastax.driver.core.DataType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.Indexed;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
@@ -18,6 +19,8 @@ public class Customer {
     private String lastName;
     private String email;
     private Date birthday;
+    @Indexed
+    private int zipcode;
 
     public UUID getId() {
         return id;
@@ -57,5 +60,13 @@ public class Customer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
     }
 }

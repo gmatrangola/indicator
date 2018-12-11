@@ -10,21 +10,22 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/customers", produces = {"application/json"})
+@RequestMapping(path = "/customers", produces = {"application/json"})
 public class CustomerController {
     private static final SimpleDateFormat BIRTHDAY_TEXT_FORMAT = new SimpleDateFormat("YYYYMMdd");
 
     @Autowired
     CustomerRepository customerRepository;
 
-    @RequestMapping("/")
+    @RequestMapping(path = "/")
     public List<Customer> getAll() {
         return customerRepository.findAll();
     }
 
-    @RequestMapping("/customer/{id}")
+    @RequestMapping(path = "/customer/{id}")
     public Customer get(@PathVariable UUID id) {
         Optional<Customer> cust = customerRepository.findById(id);
         if (cust.isPresent()) return cust.get();
@@ -32,7 +33,7 @@ public class CustomerController {
     }
 
     @RequestMapping("/new")
-    public Customer makeCustomer(@RequestParam String email,
+    public Customer newCustomer(@RequestParam String email,
                                @RequestParam String lastName,
                                @RequestParam String firstName,
                                  @RequestParam(name = "birthday", required = false) String birthdayText) {
@@ -53,13 +54,18 @@ public class CustomerController {
     }
 
     @RequestMapping(path = "/new", method = RequestMethod.PUT)
-    public Customer add(@RequestBody Customer customer) {
+    public Customer newCustomer(@RequestBody Customer customer) {
         customer.setId(UUID.randomUUID());
         customerRepository.save(customer);
         return customer;
     }
 
-    @RequestMapping(value={"/foo", "/foo/bar", "*.bar", "dove/*,**/data"})
+    @RequestMapping(path = "/zipcode/{zipcode}", method = RequestMethod.GET)
+    public List<Customer> zipcode(@PathVariable int zipcode) {
+        return customerRepository.findCustomersByZipcode(zipcode);
+    }
+
+    @RequestMapping(path={"/foo", "/foo/bar", "*.bar", "dove/*,**/data"})
     public String foo() {
         return "foo mapping success";
     }
