@@ -11,6 +11,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 @Table("customer")
@@ -30,4 +31,6 @@ public class Customer {
     private Date birthday;
     @Indexed
     private int zipcode;
+
+    Map<Date, Request> history;
 }

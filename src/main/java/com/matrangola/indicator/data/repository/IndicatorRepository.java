@@ -7,4 +7,6 @@ import java.util.stream.Stream;
 
 public interface IndicatorRepository extends CassandraRepository<Indicator,String> {
     Stream<Indicator> findAllByIndicatorCode(String code);
+
+    Indicator findByCountryCodeAndIndicatorCode(String countryCode, String indexCode);
 }

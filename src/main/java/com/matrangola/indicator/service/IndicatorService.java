@@ -9,5 +9,7 @@ public interface IndicatorService {
 
     List<Indicator> aboveMin(String code, Double min);
 
-    List<Indicator> aboveAverage(String code) ;
+    List<Indicator> aboveAverage(String code);
+
+    Indicator getIndicator(String countryCode, String indexCode, String email) throws Exception;
 }
