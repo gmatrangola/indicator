@@ -1,6 +1,7 @@
 package com.matrangola.indicator.controller;
 
 import com.matrangola.indicator.aop.Profile;
+import com.matrangola.indicator.aop.WatchDog;
 import com.matrangola.indicator.data.model.Indicator;
 import com.matrangola.indicator.service.IndicatorService;
 import com.matrangola.indicator.validation.ResourceException;
@@ -38,6 +39,7 @@ public class IndicatorController {
     }
 
     @Profile
+    @WatchDog(timeout = 20)
     @GetMapping("/{countryCode}/{indexCode}/idx")
     public Indicator getIndicator(@PathVariable String countryCode,
                                   @PathVariable String indexCode,
