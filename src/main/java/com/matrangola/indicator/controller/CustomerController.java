@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -16,6 +18,18 @@ public class CustomerController {
 
     @Autowired
     CustomerRepository customerRepository;
+
+    @RequestMapping("/")
+    public List<Customer> getAll() {
+        return customerRepository.findAll();
+    }
+
+    @RequestMapping("/customer/{id}")
+    public Customer get(@PathVariable UUID id) {
+        Optional<Customer> cust = customerRepository.findById(id);
+        if (cust.isPresent()) return cust.get();
+        else return new Customer(); // throw error for 402
+    }
 
     @RequestMapping("/new")
     public Customer makeCustomer(@RequestParam String email,
