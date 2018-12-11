@@ -2,6 +2,7 @@ package com.matrangola.indicator.controller;
 
 import com.matrangola.indicator.data.model.Indicator;
 import com.matrangola.indicator.service.IndicatorService;
+import com.matrangola.indicator.validation.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class IndicatorController {
     @GetMapping("/{countryCode}/{indexCode}/idx")
     public Indicator getIndicator(@PathVariable String countryCode,
                                   @PathVariable String indexCode,
-                                  @RequestParam String email) throws Exception {
+                                  @RequestParam String email) throws ResourceException {
         return indicatorService.getIndicator(countryCode, indexCode, email);
     }
 }

@@ -5,6 +5,7 @@ import com.matrangola.indicator.data.model.Indicator;
 import com.matrangola.indicator.data.model.Request;
 import com.matrangola.indicator.data.repository.CustomerRepository;
 import com.matrangola.indicator.data.repository.IndicatorRepository;
+import com.matrangola.indicator.validation.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +43,12 @@ public class IndicatorServiceImpl implements IndicatorService{
     }
 
     @Override
-    public Indicator getIndicator(String countryCode, String indexCode, String email) throws Exception {
+    public Indicator getIndicator(String countryCode, String indexCode, String email) throws ResourceException {
 
         Optional<Customer> cust = customerRepository.findCustomerByEmail(email);
 
         if (!cust.isPresent()) {
-            throw new Exception("No Customer");
+            throw new ResourceException(Customer.class, email);
         }
         Customer customer = cust.get();
 

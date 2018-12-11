@@ -2,6 +2,7 @@ package com.matrangola.indicator.controller;
 
 import com.matrangola.indicator.data.model.Customer;
 import com.matrangola.indicator.data.repository.CustomerRepository;
+import com.matrangola.indicator.validation.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,11 +67,11 @@ public class CustomerController {
     }
 
     @RequestMapping(path = "/customer")
-    public Customer customerByEmail(@RequestParam String email) {
+    public Customer customerByEmail(@RequestParam String email) throws ResourceException {
         // todo 404 when not found
         Optional<Customer> result = customerRepository.findCustomerByEmail(email);
         if (result.isPresent()) return result.get();
-        else return new Customer();
+        else throw new ResourceException(Customer.class, email);
     }
 
     @RequestMapping(path={"/foo", "/foo/bar", "*.bar", "dove/*,**/data"})
