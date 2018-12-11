@@ -1,6 +1,7 @@
 package com.matrangola.indicator.data.model;
 
 import com.datastax.driver.core.DataType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Customer {
     private String lastName;
     @Indexed
     private String email;
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private Date birthday;
     @Indexed
     private int zipcode;

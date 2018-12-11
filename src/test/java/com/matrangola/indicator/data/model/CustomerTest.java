@@ -18,7 +18,7 @@ public class CustomerTest {
     public void setUp() throws Exception {
         cal = Calendar.getInstance();
         cal.set(1999, Calendar.OCTOBER, 28);
-        customer = new Customer(UUID.randomUUID(), "First", "Last", "test@example.com", cal.getTime(), 21044);
+        customer = new Customer(UUID.randomUUID(), "First", "Last", "test@example.com", cal.getTime(), 21044, null);
 //                UUID.randomUUID(), "First", "Last", 21044,
 //                "test@example.com", cal.getTime());
     }
