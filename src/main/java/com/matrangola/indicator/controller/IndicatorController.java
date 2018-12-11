@@ -1,5 +1,6 @@
 package com.matrangola.indicator.controller;
 
+import com.matrangola.indicator.aop.Profile;
 import com.matrangola.indicator.data.model.Indicator;
 import com.matrangola.indicator.service.IndicatorService;
 import com.matrangola.indicator.validation.ResourceException;
@@ -18,21 +19,25 @@ public class IndicatorController {
     /**
      * http://server/indicators/average/indicatorCode=IP.FOO
      */
+    @Profile
     @RequestMapping(path ="/average")
     Double average(@RequestParam String indicatorCode) {
         return indicatorService.worldwideAverage(indicatorCode);
     }
 
+    @Profile
     @GetMapping("above")
     public List<Indicator> aboveMin(@RequestParam String code, @RequestParam double min) {
         return indicatorService.aboveMin(code, min);
     }
 
+    @Profile
     @GetMapping("aboveAvg")
     public List<Indicator> aboveAvg(@RequestParam String code) {
         return indicatorService.aboveAverage(code);
     }
 
+    @Profile
     @GetMapping("/{countryCode}/{indexCode}/idx")
     public Indicator getIndicator(@PathVariable String countryCode,
                                   @PathVariable String indexCode,

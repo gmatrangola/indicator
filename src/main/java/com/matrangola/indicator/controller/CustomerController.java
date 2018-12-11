@@ -1,5 +1,6 @@
 package com.matrangola.indicator.controller;
 
+import com.matrangola.indicator.aop.Profile;
 import com.matrangola.indicator.data.model.Customer;
 import com.matrangola.indicator.data.repository.CustomerRepository;
 import com.matrangola.indicator.validation.ResourceException;
@@ -21,11 +22,14 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Profile
     @RequestMapping(path = "/")
     public List<Customer> getAll() {
         return customerRepository.findAll();
     }
 
+
+    @Profile
     @RequestMapping(path = "/customer/{id}")
     public Customer get(@PathVariable UUID id) {
         Optional<Customer> cust = customerRepository.findById(id);
@@ -33,6 +37,7 @@ public class CustomerController {
         else return new Customer(); // throw error for 402
     }
 
+    @Profile
     @RequestMapping("/new")
     public Customer newCustomer(@RequestParam String email,
                                @RequestParam String lastName,
@@ -54,6 +59,7 @@ public class CustomerController {
         return customer;
     }
 
+    @Profile
     @RequestMapping(path = "/new", method = RequestMethod.PUT)
     public Customer newCustomer(@RequestBody Customer customer) {
         customer.setId(UUID.randomUUID());
@@ -61,11 +67,13 @@ public class CustomerController {
         return customer;
     }
 
+    @Profile
     @RequestMapping(path = "/zipcode/{zipcode}", method = RequestMethod.GET)
     public List<Customer> zipcode(@PathVariable int zipcode) {
         return customerRepository.findCustomersByZipcode(zipcode);
     }
 
+    @Profile
     @RequestMapping(path = "/customer")
     public Customer customerByEmail(@RequestParam String email) throws ResourceException {
         // todo 404 when not found
@@ -74,6 +82,7 @@ public class CustomerController {
         else throw new ResourceException(Customer.class, email);
     }
 
+    @Profile
     @RequestMapping(path={"/foo", "/foo/bar", "*.bar", "dove/*,**/data"})
     public String foo() {
         return "foo mapping success";
