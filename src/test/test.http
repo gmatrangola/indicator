@@ -52,6 +52,11 @@ Accept: application/json
 
 ###
 
+GET http://localhost:8080/customers/customer?email=bobs@example.com
+Accept: application/json
+
+###
+
 GET http://localhost:8080/customers/customer/92c720e3-b9d4-4987-a791-2bb9e6f66d4d
 Accept: application/json
 

@@ -65,6 +65,14 @@ public class CustomerController {
         return customerRepository.findCustomersByZipcode(zipcode);
     }
 
+    @RequestMapping(path = "/customer")
+    public Customer customerByEmail(@RequestParam String email) {
+        // todo 404 when not found
+        Optional<Customer> result = customerRepository.findCustomerByEmail(email);
+        if (result.isPresent()) return result.get();
+        else return new Customer();
+    }
+
     @RequestMapping(path={"/foo", "/foo/bar", "*.bar", "dove/*,**/data"})
     public String foo() {
         return "foo mapping success";
