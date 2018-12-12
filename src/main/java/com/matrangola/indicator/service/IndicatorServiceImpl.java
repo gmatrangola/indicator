@@ -1,9 +1,6 @@
 package com.matrangola.indicator.service;
 
-import com.matrangola.indicator.data.model.Customer;
 import com.matrangola.indicator.data.model.Indicator;
-import com.matrangola.indicator.data.model.Request;
-import com.matrangola.indicator.data.repository.CustomerRepository;
 import com.matrangola.indicator.data.repository.IndicatorRepository;
 import com.matrangola.indicator.validation.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +14,10 @@ import java.util.stream.Stream;
 public class IndicatorServiceImpl implements IndicatorService{
     private final
     IndicatorRepository indicatorRepository;
-    private final
-    CustomerRepository customerRepository;
 
     @Autowired
-    public IndicatorServiceImpl(IndicatorRepository indicatorRepository, CustomerRepository customerRepository) {
+    public IndicatorServiceImpl(IndicatorRepository indicatorRepository) {
         this.indicatorRepository = indicatorRepository;
-        this.customerRepository = customerRepository;
     }
 
     public Double worldwideAverage(String code) {
@@ -51,21 +45,21 @@ public class IndicatorServiceImpl implements IndicatorService{
     @Override
     public Indicator getIndicator(String countryCode, String indexCode, String email) throws ResourceException {
 
-        Optional<Customer> cust = customerRepository.findCustomerByEmail(email);
-
-        if (!cust.isPresent()) {
-            throw new ResourceException(Customer.class, email);
-        }
-        Customer customer = cust.get();
-
-        Request request = new Request(countryCode, indexCode);
-        Map<Date, Request> history = customer.getHistory();
-        if (history == null) {
-            history = new HashMap<>();
-            customer.setHistory(history);
-        }
-        history.put(new Date(), request);
-        customerRepository.save(customer);
+//        Optional<Customer> cust = customerRepository.findCustomerByEmail(email);
+//
+//        if (!cust.isPresent()) {
+//            throw new ResourceException(Customer.class, email);
+//        }
+//        Customer customer = cust.get();
+//
+//        Request request = new Request(countryCode, indexCode);
+//        Map<Date, Request> history = customer.getHistory();
+//        if (history == null) {
+//            history = new HashMap<>();
+//            customer.setHistory(history);
+//        }
+//        history.put(new Date(), request);
+//        customerRepository.save(customer);
 
         return indicatorRepository.findByCountryCodeAndIndicatorCode(
                 countryCode, indexCode);
