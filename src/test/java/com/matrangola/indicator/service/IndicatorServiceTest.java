@@ -10,9 +10,11 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 public class IndicatorServiceTest {
@@ -56,9 +58,14 @@ public class IndicatorServiceTest {
 
     @Test
     public void aboveMin() {
+        List<Indicator> above = indicatorService.aboveMin("IP.FOO", 32.2);
+        assertNotNull(above);
+        assertEquals(2, above.size());
+
     }
 
     @Test
     public void aboveAverage() {
+        List<Indicator> aboveAverage = indicatorService.aboveAverage("IP.FOO");
     }
 }
