@@ -30,6 +30,16 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-cassandra')
 	implementation('io.dropwizard.metrics:metrics-core:3.2.6')
 	implementation('org.springframework.boot:spring-boot-starter-aop')
+
+	compile group: 'org.springframework.security', name: 'spring-security-config', version: '5.1.2.RELEASE'
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
+	compile group: 'org.springframework.security', name: 'spring-security-web', version: '5.1.2.RELEASE'
+	compile('org.springframework.security.oauth:spring-security-oauth2:2.1.1.RELEASE')
+
+	implementation('org.springframework.security:spring-security-ldap')
+	compile group: 'org.apache.directory.server', name: 'apacheds-server-jndi', version: '1.5.5'
+
+
 	compileOnly('org.projectlombok:lombok')
 	runtimeOnly('org.springframework.boot:spring-boot-devtools')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')

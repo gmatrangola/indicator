@@ -78,9 +78,17 @@ Accept: application/json
 ###
 
 GET http://localhost:8080/indicators/aboveAvg?code=IP.PAT.RESD
+Authorization: Basic {{username}} {{password}}
 Accept: application/json
 
 ###
+
+GET http://localhost:8080/indicators/aboveAvg?code=IP.PAT.RESD
+Authorization: Basic {{username}} foo
+Accept: application/json
+
+###
+
 
 GET http://localhost:8080/indicators/USA/IP.PAT.RESD/idx?email=ts@example.com
 Accept: application/json
