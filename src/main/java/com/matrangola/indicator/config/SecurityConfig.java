@@ -29,20 +29,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
+//                .and()
+                .antMatchers("/customers")
+                .permitAll().anyRequest().authenticated()
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(authEntryPoint);
+
         http.headers().cacheControl().disable();
-        http.authorizeRequests()
-                .antMatchers("/", "/home", "/indicator")
-                .permitAll().anyRequest().authenticated();
-        http
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout().logoutSuccessUrl("/");
+
+//        http.authorizeRequests()
+//                .antMatchers("/customers")
+//                .permitAll().anyRequest().authenticated();
+
+//        http
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
+//                .and()
+//                .logout().logoutSuccessUrl("/");
     }
 
 }

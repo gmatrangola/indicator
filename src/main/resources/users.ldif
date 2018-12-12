@@ -18,6 +18,16 @@ sn: Smith
 uid: tsmith
 userPassword: password
 
+dn: uid=bsmith,ou=people,dc=matrangola,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Bob Smith
+sn: Smith
+uid: bsmith
+userPassword: password
+
 dn: cn=admin,ou=groups,dc=matrangola,dc=com
 objectclass: top
 objectclass: groupOfNames

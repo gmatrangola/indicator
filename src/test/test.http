@@ -48,6 +48,13 @@ content-type: application/json
 ###
 
 GET http://localhost:8080/customers/
+Authorization: Basic {{username}} {{password}}
+Accept: application/json
+
+###
+
+GET http://localhost:8080/customers/whoami
+Authorization: Basic {{username}} {{password}}
 Accept: application/json
 
 ###
@@ -78,7 +85,6 @@ Accept: application/json
 ###
 
 GET http://localhost:8080/indicators/aboveAvg?code=IP.PAT.RESD
-Authorization: Basic {{username}} {{password}}
 Accept: application/json
 
 ###

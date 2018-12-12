@@ -5,8 +5,13 @@ import com.matrangola.indicator.data.model.Customer;
 import com.matrangola.indicator.data.repository.CustomerRepository;
 import com.matrangola.indicator.validation.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -86,4 +91,23 @@ public class CustomerController {
     public String foo() {
         return "foo mapping success";
     }
+
+    @RequestMapping(path = "/whoami")
+    public String whoami(Principal principal,
+                         @AuthenticationPrincipal UserDetails userDetails) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Principal.getUserName = ").append(principal.getName()).append("\n");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        sb.append("SecurityContextHolder.getContext().getAuthentication()=")
+                .append(auth.getName()).append("\n");
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().
+                getAuthentication().getPrincipal();
+        sb.append(       	"UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()=")
+                .append(user.getUsername()).append("\n");
+        sb.append("userDetails.getUsername() = ")
+                .append(userDetails.getUsername()).append("\n");
+        return sb.toString();
+    }
+
+
 }
