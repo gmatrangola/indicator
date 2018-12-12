@@ -15,10 +15,16 @@ import java.util.stream.Stream;
 
 @Service
 public class IndicatorServiceImpl implements IndicatorService{
-    @Autowired
+    private final
     IndicatorRepository indicatorRepository;
-    @Autowired
+    private final
     CustomerRepository customerRepository;
+
+    @Autowired
+    public IndicatorServiceImpl(IndicatorRepository indicatorRepository, CustomerRepository customerRepository) {
+        this.indicatorRepository = indicatorRepository;
+        this.customerRepository = customerRepository;
+    }
 
     public Double worldwideAverage(String code) {
         Stream<Indicator> allByIndicatorCode = indicatorRepository
