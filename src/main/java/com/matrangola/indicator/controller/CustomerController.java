@@ -76,7 +76,6 @@ public class CustomerController {
     @Profile
     @RequestMapping(path = "/customer")
     public Customer customerByEmail(@RequestParam String email) throws ResourceException {
-        // todo 404 when not found
         Optional<Customer> result = customerRepository.findCustomerByEmail(email);
         if (result.isPresent()) return result.get();
         else throw new ResourceException(Customer.class, email);

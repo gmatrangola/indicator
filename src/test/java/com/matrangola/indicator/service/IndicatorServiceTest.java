@@ -1,8 +1,8 @@
 package com.matrangola.indicator.service;
 
 import com.matrangola.indicator.data.model.Indicator;
+import com.matrangola.indicator.data.repository.CustomerRepository;
 import com.matrangola.indicator.data.repository.IndicatorRepository;
-import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,15 +16,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 public class IndicatorServiceTest {
-
-    private Indicator indicator;
-
-    @MockBean
-    IndicatorRepository indicatorRepository;
 
     @TestConfiguration
     static class IndicatorServiceImplTestConfig {
@@ -35,23 +30,39 @@ public class IndicatorServiceTest {
     }
 
     @Autowired
-    IndicatorService indicatorService;
+    private IndicatorService indicatorService;
+
+    @MockBean
+    private IndicatorRepository indicatorRepository;
+
+    @MockBean
+    private CustomerRepository customerRepository;
 
     @Before
     public void setup() {
-        indicator = new Indicator();
-        indicator.setCountryCode("USA");
-        indicator.setIndicatorCode("IP.FOO");
-        indicator.setYear2017(123.4);
+        Indicator[] indicators = {
+                mkIndicator("USA", "IP.FOO", 50.5),
+                mkIndicator("GBR", "IP.FOO", 100.5),
+                mkIndicator("ZZZ", "IP.FOO", 30.0)
+        };
 
         Mockito.when(indicatorRepository.findAllByIndicatorCode("IP.FOO"))
-                .thenReturn(Stream.of(indicator));
+                .thenReturn(Stream.of(indicators));
 
+    }
+
+    private Indicator mkIndicator(String countryCode, String indicatorCode, double year2017) {
+        Indicator indicator = new Indicator();
+        indicator.setCountryCode(countryCode);
+        indicator.setIndicatorCode(indicatorCode);
+        indicator.setYear2017(year2017);
+        return indicator;
     }
 
     @Test
     public void worldwideAverage() {
-        Assert.assertEquals(123.4, (double) indicatorService.worldwideAverage("IP.FOO"));
+        assertEquals(60.333,
+                indicatorService.worldwideAverage("IP.FOO"), 0.001);
     }
 
     @Test
