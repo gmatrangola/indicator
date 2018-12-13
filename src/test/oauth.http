@@ -24,12 +24,6 @@ Authorization: Basic Y29ycDpzZWNyZXQ=
 
 ###
 
-POST http://localhost:8080/oauth/token?grant_type=password&username={{username}}&password={{password}}
-Accept: application/json
-Authorization: Basic corp secret
-
-###
-
 GET http://localhost:8080/indicators/aboveAvg?code=IP.PAT.RESD&access_token=023bafea-d05a-4a87-89d6-012e7f690de0
 Accept: application/json
 
@@ -40,3 +34,16 @@ Authorization: Bearer 023bafea-d05a-4a87-89d6-012e7f690de8
 Accept: application/json
 
 ###
+
+POST http://localhost:8080/oauth/token?grant_type=password&username={{username}}&password={{password}}
+Accept: application/json
+Authorization: Basic corp secret
+
+###
+
+GET http://localhost:8080/indicators/USA/IP.PAT.RESD/idx
+Authorization: Bearer 430e567a-728a-4910-8963-9d12b5f1455a
+Accept: application/json
+
+###
+

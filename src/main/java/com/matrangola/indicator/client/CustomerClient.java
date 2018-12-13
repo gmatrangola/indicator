@@ -1,5 +1,6 @@
 package com.matrangola.indicator.client;
 
+import com.matrangola.indicator.config.FeignClientConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
-@FeignClient("microcustomer")
+@FeignClient(name = "microcustomer", configuration = FeignClientConfiguration.class)
 public interface CustomerClient {
     @RequestMapping(method = RequestMethod.GET, path = "/customers/logAccess/{username}")
     boolean logAccess(

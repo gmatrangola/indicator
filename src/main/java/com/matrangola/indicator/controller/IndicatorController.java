@@ -44,7 +44,7 @@ public class IndicatorController {
     @WatchDog(timeout = 20)
     @GetMapping("/{countryCode}/{indexCode}/idx")
     public Indicator getIndicator(@PathVariable String countryCode,
-                                  @PathVariable String indexCode, Principal principal) throws ResourceException {
-        return indicatorService.getIndicator(countryCode, indexCode, principal.getName());
+                                  @PathVariable String indexCode) throws ResourceException {
+        return indicatorService.getIndicator(countryCode, indexCode, "tsmith");
     }
 }
