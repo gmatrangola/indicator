@@ -95,6 +95,13 @@ Accept: application/json
 
 ###
 
+GET http://localhost:8080/indicators/aboveAvg?code=IP.PAT.RESD
+Authorization: Bearer 9b7d6a8f-8d38-4bce-b881-37491130cd44
+Accept: application/json
+
+###
+
+
 
 GET http://localhost:8080/indicators/USA/IP.PAT.RESD/idx?email=ts@example.com
 Accept: application/json
