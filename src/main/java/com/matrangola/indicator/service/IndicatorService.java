@@ -12,5 +12,5 @@ public interface IndicatorService {
 
     List<Indicator> aboveAverage(String code);
 
-    Indicator getIndicator(String countryCode, String indexCode, String email) throws ResourceException;
+    Indicator getIndicator(String countryCode, String indexCode, String username) throws ResourceException;
 }

@@ -11,5 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("microcustomer")
 public interface CustomerClient {
     @RequestMapping(method = RequestMethod.GET, path = "/customers/logAccess/{username}")
-    boolean logAccess(@PathVariable String username, @RequestParam String countryCode, @RequestParam String indexCode);
+    boolean logAccess(
+            @PathVariable("username") String username,
+            @RequestParam("countryCode") String countryCode,
+            @RequestParam("indexCode") String indexCode);
 }
