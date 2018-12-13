@@ -1,5 +1,6 @@
 package com.matrangola.indicator.service;
 
+import com.matrangola.indicator.client.CustomerClient;
 import com.matrangola.indicator.data.model.Indicator;
 import com.matrangola.indicator.data.repository.IndicatorRepository;
 import com.matrangola.indicator.validation.ResourceException;
@@ -14,6 +15,9 @@ import java.util.stream.Stream;
 public class IndicatorServiceImpl implements IndicatorService{
     private final
     IndicatorRepository indicatorRepository;
+
+    @Autowired
+    CustomerClient customerClient;
 
     @Autowired
     public IndicatorServiceImpl(IndicatorRepository indicatorRepository) {
@@ -43,7 +47,7 @@ public class IndicatorServiceImpl implements IndicatorService{
     }
 
     @Override
-    public Indicator getIndicator(String countryCode, String indexCode, String email) throws ResourceException {
+    public Indicator getIndicator(String countryCode, String indexCode, String username) throws ResourceException {
 
 //        Optional<Customer> cust = customerRepository.findCustomerByEmail(email);
 //
@@ -61,7 +65,12 @@ public class IndicatorServiceImpl implements IndicatorService{
 //        history.put(new Date(), request);
 //        customerRepository.save(customer);
 
-        return indicatorRepository.findByCountryCodeAndIndicatorCode(
-                countryCode, indexCode);
+        if (customerClient.logAccess(username, countryCode, indexCode)) {
+            return indicatorRepository.findByCountryCodeAndIndicatorCode(
+                    countryCode, indexCode);
+        }
+        else {
+            throw new ResourceException(Indicator.class, username);
+        }
     }
 }
